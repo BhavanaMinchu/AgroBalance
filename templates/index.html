@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgroBalance</title>
+    <link rel="stylesheet" href="static/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h1>AgroBalance</h1>
+        <h2>Crop and Fertilizer Recommendation System</h2>
+        <br />
+        <form id="prediction-form" action="/predict" method="post">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="n">Nitrogen (N):</label>
+              <input type="number" id="n" name="N" min="0" max="300" required />
+            </div>
+
+            <div class="form-group">
+              <label for="p">Phosphorous (P):</label>
+              <input type="number" id="p" name="P" min="0" max="300" required />
+            </div>
+
+            <div class="form-group">
+              <label for="k">Potassium (K):</label>
+              <input type="number" id="k" name="K" min="0" max="300" required />
+            </div>
+
+            <div class="form-group">
+              <label for="temperature">Temperature:</label>
+              <input
+                type="number"
+                id="temperature"
+                name="Temperature"
+                min="0"
+                max="50"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="humidity">Humidity:</label>
+              <input
+                type="number"
+                id="humidity"
+                name="Humidity"
+                min="0"
+                max="100"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="ph">pH:</label>
+              <input
+                type="number"
+                id="ph"
+                name="pH"
+                min="0"
+                max="14"
+                step="0.01"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="rainfall">Rainfall:</label>
+              <input
+                type="number"
+                id="rainfall"
+                name="Rainfall"
+                min="0"
+                max="400"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="moisture">Moisture:</label>
+              <input
+                type="number"
+                id="moisture"
+                name="Moisture"
+                min="0"
+                max="100"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="soil_type">Soil Type:</label>
+            <select id="soil_type" name="Soil Type" required>
+              <option value="Sandy">Sandy</option>
+              <option value="Clayey">Clay</option>
+              <option value="Red">Red</option>
+              <option value="Black">Black</option>
+              <option value="Loamy">Loamy</option>
+            </select>
+          </div>
+
+          <button type="submit">Predict</button>
+        </form>
+
+        <div id="result" class="result">
+          <!-- Result will appear here -->
+          {% if predicted_crop and predicted_fertilizer %}
+          <h3>Prediction Results</h3>
+          <p><strong>Predicted Crop:</strong> {{ predicted_crop }}</p>
+          <p>
+            <strong>Recommended Fertilizer:</strong> {{ predicted_fertilizer }}
+          </p>
+          <p>
+            <strong>Fertilizer Amount Needed: </strong>{{ fertilizer_amount }}
+            kg/ha
+          </p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
